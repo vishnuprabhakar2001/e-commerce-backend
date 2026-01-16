@@ -135,3 +135,73 @@ Add wishlist functionality
 Implement product reviews and ratings
 
 Implement email notifications
+
+
+
+
+Folder and File Structure
+
+E-Commerce_Backend/
+│
+├─ .env                    # Environment variables (not pushed)
+├─ .gitignore              # Ignored files (node_modules, .env, package-lock.json)
+├─ package.json            # Node project configuration
+├─ package-lock.json       # Installed dependencies
+├─ README.md               # Project description (this file)
+│
+├─ src/                    # Source code
+│   ├─ index.js            # Entry point (server setup)
+│   ├─ app.js              # Express app configuration (middleware, routes)
+│   │
+│   ├─ config/             # Configuration files
+│   │   └─ db.js           # MongoDB connection setup
+│   │
+│   ├─ controllers/        # Route handlers (logic for requests)
+│   │   ├─ auth.controller.js
+│   │   ├─ user.controller.js
+│   │   ├─ product.controller.js
+│   │   ├─ category.controller.js
+│   │   ├─ cart.controller.js
+│   │   └─ order.controller.js
+│   │
+│   ├─ services/           # Business logic / services
+│   │   ├─ auth.service.js
+│   │   ├─ user.service.js
+│   │   ├─ product.service.js
+│   │   ├─ category.service.js
+│   │   ├─ cart.service.js
+│   │   └─ order.service.js
+│   │
+│   ├─ middlewares/        # Custom middleware
+│   │   ├─ auth.middleware.js       # JWT auth verification
+│   │   ├─ role.middleware.js       # Role-based access control
+│   │   ├─ async.middleware.js      # Async wrapper for controllers
+│   │   └─ error.middleware.js      # Custom error handling
+│   │
+│   ├─ models/             # Mongoose schemas
+│   │   ├─ user.model.js
+│   │   ├─ product.model.js
+│   │   ├─ category.model.js
+│   │   ├─ cart.model.js
+│   │   └─ order.model.js
+│   │
+│   ├─ routes/             # Express routes
+│   │   ├─ auth.routes.js
+│   │   ├─ user.routes.js
+│   │   ├─ product.routes.js
+│   │   ├─ category.routes.js
+│   │   ├─ cart.routes.js
+│   │   ├─ order.routes.js
+│   │   └─ index.js         # Route aggregator
+│   │
+│   ├─ utils/              # Utility/helper functions
+│   │   ├─ ApiError.js
+│   │   ├─ ApiResponse.js
+│   │   ├─ constants.js
+│   │   └─ cookieOptions.js
+│   │
+│   └─ validators/         # Input validation
+│       ├─ auth.validator.js
+│       ├─ product.validator.js
+│       ├─ order.validator.js
+│       └─ category.validator.js
