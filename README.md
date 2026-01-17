@@ -197,8 +197,8 @@ E-Commerce_Backend/
 │   ├─ utils/              # Utility/helper functions
 │   │   ├─ ApiError.js
 │   │   ├─ ApiResponse.js
-│   │   ├─ constants.js
-│   │   └─ cookieOptions.js
+│   │   
+│   │  
 │   │
 │   └─ validators/         # Input validation
 │       ├─ auth.validator.js
