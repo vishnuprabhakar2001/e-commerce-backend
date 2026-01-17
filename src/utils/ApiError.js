@@ -1,7 +1,7 @@
 class ApiError extends Error {
   constructor(
-    message = "Bad Request",
     statusCode = 400,
+    message = "Bad Request",
     errors = []
   ) {
     super(message);
@@ -14,3 +14,4 @@ class ApiError extends Error {
 }
 
 export default ApiError;
+ 

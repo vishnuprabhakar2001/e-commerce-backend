@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
@@ -23,9 +23,10 @@ const userSchema = new mongoose.Schema(
       select: false
     },
     role: {
-      type: String,
-      default: "user"
-    }
+  type: String,
+  enum: ["user", "admin"],
+  default: "user"
+}
   },
   { timestamps: true }
 );
