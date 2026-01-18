@@ -7,7 +7,7 @@ export const protect = asyncHandler(async (req, res, next) => {
   const token = req.cookies?.accessToken;
 
   if (!token) {
-    throw new ApiError(401, "Not authorized, token missing");
+    throw new ApiError(400, "Not authorized, token missing");
   }
 
   const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
@@ -15,7 +15,7 @@ export const protect = asyncHandler(async (req, res, next) => {
   const user = await User.findById(decoded._id).select("-password");
 
   if (!user) {
-    throw new ApiError(401, "User not found");
+    throw new ApiError(400, "User not found");
   }
 
   req.user = user; 

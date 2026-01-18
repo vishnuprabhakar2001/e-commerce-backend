@@ -26,3 +26,17 @@ export const loginUser = asyncHandler(async (req, res) => {
   );
 });
 
+
+export const logoutUser = (req, res) => {
+  res.clearCookie("accessToken", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "User logged out successfully",
+  });
+};
+
