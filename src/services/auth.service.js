@@ -2,14 +2,14 @@ import User from "../models/user.model.js";
 import ApiError from "../utils/ApiError.js";
 
 export const registerUserService = async (userData) => {
-  const { name, email, password } = userData;
+  const { name, email, password, role } = userData;
 
   const existingUser = await User.findOne({ email });
   if (existingUser) {
     throw new ApiError(400, "User already exists with this email");
   }
 
-  const user = await User.create({ name, email, password });
+  const user = await User.create({ name, email, password, role });
 
   return User.findById(user._id).select("-password");
 };
