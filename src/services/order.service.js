@@ -73,3 +73,63 @@ export const updateOrderStatusService = async (orderId, status) => {
 
   return order;
 };
+
+
+export const cancelOrderByUserService = async (orderId, userId) => {
+  const order = await Order.findOne({ _id: orderId, user: userId });
+
+  if (!order) {
+    throw new ApiError(400, "Order not found");
+  }
+
+  if (order.status === "cancelled") {
+    throw new ApiError(400, "Order is already cancelled");
+  }
+
+  if (["shipped", "delivered"].includes(order.status)) {
+    throw new ApiError(
+      400,
+      "Order cannot be cancelled after shipment"
+    );
+  }
+
+  // Restore stock
+  for (const item of order.items) {
+    const product = await Product.findById(item.product);
+    if (product) {
+      product.stock += item.quantity;
+      await product.save();
+    }
+  }
+
+  order.status = "cancelled";
+  await order.save();
+
+  return order;
+};
+
+export const cancelOrderByAdminService = async (orderId) => {
+  const order = await Order.findById(orderId);
+
+  if (!order) {
+    throw new ApiError(400, "Order not found");
+  }
+
+  if (order.status === "cancelled") {
+    throw new ApiError(400, "Order is already cancelled");
+  }
+
+  // Restore stock
+  for (const item of order.items) {
+    const product = await Product.findById(item.product);
+    if (product) {
+      product.stock += item.quantity;
+      await product.save();
+    }
+  }
+
+  order.status = "cancelled";
+  await order.save();
+
+  return order;
+};

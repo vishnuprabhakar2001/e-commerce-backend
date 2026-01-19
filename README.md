@@ -205,3 +205,265 @@ E-Commerce_Backend/
 │       ├─ product.validator.js
 │       ├─ order.validator.js
 │       └─ category.validator.js
+
+
+
+
+📌 Project Overview
+
+This project is a backend-only E-Commerce MVP (Minimum Viable Product) built using Node.js, Express, and MongoDB, following a clean layered architecture.
+
+The goal of this project is to implement all essential e-commerce business flows while avoiding unnecessary APIs, over-engineering, and unused logic.
+The backend is designed to be production-oriented, scalable, and interview-ready.
+
+🎯 What This Backend Supports
+User Capabilities
+
+Authentication (Register / Login / Logout)
+
+Browse products
+
+Search, filter, sort products
+
+Manage cart
+
+Place orders
+
+Cancel orders (with business rules)
+
+Admin Capabilities
+
+Product management (CRUD)
+
+Category management (CRUD)
+
+View and manage all orders
+
+Cancel orders
+
+Control inventory automatically
+
+🧱 Tech Stack
+
+Runtime: Node.js
+
+Framework: Express.js
+
+Database: MongoDB with Mongoose
+
+Authentication: JWT (HTTP-only cookies)
+
+Architecture Pattern:
+Routes → Controllers → Services → Models
+
+📂 Folder Structure
+src/
+│
+├── controllers/
+│   ├── auth.controller.js
+│   ├── product.controller.js
+│   ├── category.controller.js
+│   ├── cart.controller.js
+│   ├── order.controller.js
+│   └── user.controller.js        (intentionally empty)
+│
+├── services/
+│   ├── auth.service.js
+│   ├── product.service.js
+│   ├── category.service.js
+│   ├── cart.service.js
+│   ├── order.service.js
+│   └── user.service.js           (intentionally empty)
+│
+├── routes/
+│   ├── auth.routes.js
+│   ├── product.routes.js
+│   ├── category.routes.js
+│   ├── cart.routes.js
+│   ├── order.routes.js
+│   └── user.routes.js            (intentionally empty)
+│
+├── models/
+│   ├── user.model.js
+│   ├── product.model.js
+│   ├── category.model.js
+│   ├── cart.model.js
+│   └── order.model.js
+│
+├── validators/
+│   ├── auth.validator.js         (intentionally empty)
+│   ├── product.validator.js      (intentionally empty)
+│   ├── category.validator.js
+│   └── order.validator.js        (intentionally empty)
+│
+├── middlewares/
+│   ├── auth.middleware.js
+│   ├── role.middleware.js
+│   ├── async.middleware.js
+│   └── error.middleware.js
+│
+├── utils/
+│   ├── ApiError.js
+│   └── ApiResponse.js
+│
+├── app.js
+├── index.js
+└── config/db.js
+
+🧠 Architectural Philosophy
+
+This project strictly follows separation of concerns:
+
+Layer	Responsibility
+Routes	Define endpoints
+Controllers	Handle HTTP requests & responses
+Services	Business logic
+Models	Database schema & queries
+Middleware	Auth, role checks, error handling
+
+This ensures:
+
+Clean code
+
+Easy debugging
+
+Scalability without refactoring
+
+🔐 Authentication & Authorization
+Authentication
+
+JWT stored in HTTP-only cookies
+
+Secure login & logout
+
+Token verified on protected routes
+
+Authorization
+
+Role-based access (admin, user)
+
+Admin-only routes protected via middleware
+
+No hardcoded role logic inside controllers
+
+📦 Product Module
+Features
+
+Create / update / delete products (Admin)
+
+Public product listing
+
+Keyword search
+
+Category-based filtering
+
+Price range filtering
+
+Sorting:
+
+Price (asc / desc)
+
+Newest
+
+Name
+
+Pagination
+
+Example Query
+GET /api/products?keyword=laptop&category=electronics&sort=price&page=1&limit=10
+
+🗂 Category Module
+Features
+
+Admin CRUD operations
+
+Public category listing
+
+Category-based product filtering
+
+Validation applied only where required
+
+🛒 Cart Module
+Features
+
+Add item to cart
+
+Update quantity
+
+Remove item
+
+View user cart
+
+Automatic price calculation
+
+Cart is strictly user-specific and fully protected.
+
+📑 Order Module
+Features
+
+Place order from cart
+
+View order history
+
+Order status lifecycle
+
+Order cancellation rules:
+
+User: only before shipping
+
+Admin: anytime
+
+Inventory adjustment on order & cancellation
+
+⚠️ Error Handling Strategy
+
+Custom ApiError class
+
+Centralized error middleware
+
+Only two status codes by design:
+
+400 → validation & business errors
+
+500 → internal server errors
+
+This keeps error handling predictable and consistent.
+
+🚫 Why Some Files Are Intentionally Empty (Very Important)
+user.controller.js, user.service.js, user.routes.js
+
+These files are intentionally empty.
+
+Reason:
+
+User authentication is handled entirely in auth.controller.js
+
+No additional user features (profile update, admin user management) are required for MVP
+
+Avoided adding unnecessary or fake APIs
+
+👉 This demonstrates scope discipline, not incompleteness.
+
+auth.validator.js, order.validator.js, product.validator.js
+
+These validator files are deliberately left empty.
+
+Reason:
+
+Validation is applied only where it provides real value
+
+Over-validation was avoided to keep MVP clean
+
+Files are placed to support future scalability without structural changes
+
+🧪 MVP Status
+
+This backend is a complete and functional MVP:
+
+All core e-commerce workflows work end-to-end
+
+No dead routes
+
+No placeholder logic
+
+Ready for frontend or mobile integration

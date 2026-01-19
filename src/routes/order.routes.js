@@ -4,6 +4,8 @@ import {
   getMyOrders,
   getAllOrders,
   updateOrderStatus,
+  cancelMyOrder,
+  cancelOrderByAdmin,
 } from "../controllers/order.controller.js";
 import { protect } from "../middlewares/auth.middleware.js";
 import { authorizeRoles } from "../middlewares/role.middleware.js";
@@ -22,5 +24,21 @@ router.put(
   authorizeRoles("admin"),
   updateOrderStatus
 );
+
+// User cancel own order
+router.put(
+  "/:id/cancel",
+  protect,
+  cancelMyOrder
+);
+
+// Admin cancel any order
+router.put(
+  "/admin/:id/cancel",
+  protect,
+  authorizeRoles("admin"),
+  cancelOrderByAdmin
+);
+
 
 export default router;
