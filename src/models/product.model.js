@@ -27,8 +27,9 @@ const productSchema = new mongoose.Schema(
     },
 
     category: {
-      type: String,
-      required: [true, "Product category is required"],
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true
     },
 
     images: [
